@@ -26,10 +26,9 @@ public class Jugar : State
     {
         base.LoadComponent();
     }
-    // Update is called once per frame
-    void Update()
+    public override void Execute()
     {
-        if(FrameRate> arrayTime[index])
+        if (FrameRate > arrayTime[index])
         {
             FrameRate = 0;
             index++;
@@ -39,6 +38,11 @@ public class Jugar : State
 
             m_MachineState.NextState(TypeState.Banno);
         }
-        FrameRate += Time.deltaTime; 
+        FrameRate += Time.deltaTime;
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        Execute();
     }
 }
