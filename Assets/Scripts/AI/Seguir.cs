@@ -33,13 +33,11 @@ public class Seguir : State
 
             m_health.sleep = Mathf.Clamp(m_health.sleep + UnityEngine.Random.Range(2, 20), 0, 100);
             if (m_health.sleep == 100)
-                m_MachineState.NextState(TypeState.Jugar);
-
-           
+                m_MachineState.NextState(TypeState.Dormir);
         }
         FrameRate += Time.deltaTime;
         if (target != null)
-            _steeringBehavior.Arrive(target.position);
+            _steeringBehavior.ArriveNavigatorMesh(target.position);
         else
             m_MachineState.NextState(TypeState.Jugar);
     }
