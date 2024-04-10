@@ -1,30 +1,29 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
-public class Dormir : State
+public class Seguir : State
 {
-    
-    [SerializeField]
-    int index = 0;
+    public Transform target;
     public int Timesleep = 8;
+    StreeringBehavior _steeringBehavior;
     void Start()
     {
+        RandeArray();
         LoadComponent();
     }
     public override void LoadComponent()
     {
         base.LoadComponent();
+        _steeringBehavior = GetComponent<StreeringBehavior>();
     }
     public override void Enter()
     {
-
+        FrameRate = 0;
     }
     public override void Execute()
     {
-        if (FrameRate > arrayTime[index])
+        if(FrameRate > arrayTime[index])
         {
             FrameRate = 0;
             index++;
@@ -32,16 +31,17 @@ public class Dormir : State
                 RandeArray();
             index = index % arrayTime.Length;
 
-            Timesleep--;
-            if (Timesleep == 0)
+            m_health.sleep = Mathf.Clamp(m_health.sleep + UnityEngine.Random.Range(2, 20), 0, 100);
+            if (m_health.sleep == 100)
                 m_MachineState.NextState(TypeState.Jugar);
 
+           
         }
         FrameRate += Time.deltaTime;
-    }
-    public override void Exit()
-    {
-        Timesleep = 8;
+        if (target != null)
+            _steeringBehavior.Arrive(target.position);
+        else
+            m_MachineState.NextState(TypeState.Jugar);
     }
     // Update is called once per frame
     void Update()

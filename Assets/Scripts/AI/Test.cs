@@ -18,8 +18,8 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _StreeringBehavior.target = _PathFollowing.NextCurrentPointPath();
+        //_StreeringBehavior.target = _PathFollowing.NextCurrentPointPath();
 
-        _StreeringBehavior.Arrive();
+        //_StreeringBehavior.Arrive();
     }
 }

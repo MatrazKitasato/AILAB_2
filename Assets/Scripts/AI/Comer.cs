@@ -6,9 +6,7 @@ using UnityEngine.Playables;
 
 public class Comer : State
 {
-    float FrameRate;
-    [SerializeField]
-    float[] arrayTime = new float[10];
+    
     [SerializeField]
     int index = 0;
     void Start()
@@ -16,13 +14,7 @@ public class Comer : State
         RandeArray();
         LoadComponent();
     }
-    void RandeArray()
-    {
-        for (int i = 0; i < arrayTime.Length; i++)
-        {
-            arrayTime[i] = UnityEngine.Random.Range(4, 10);
-        }
-    }
+    
     public override void LoadComponent()
     {
         base.LoadComponent();
