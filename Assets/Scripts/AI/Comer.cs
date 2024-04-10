@@ -7,8 +7,6 @@ using UnityEngine.Playables;
 public class Comer : State
 {
     
-    [SerializeField]
-    int index = 0;
     void Start()
     {
         RandeArray();

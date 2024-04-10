@@ -7,8 +7,7 @@ public class Banno : State
 
     // Start is called before the first frame update
     
-    [SerializeField]
-    int index = 0;
+    
     void Start()
     {
         RandeArray();

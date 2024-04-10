@@ -7,8 +7,7 @@ using UnityEngine.Playables;
 public class Dormir : State
 {
     
-    [SerializeField]
-    int index = 0;
+    
     public int Timesleep = 8;
     void Start()
     {
