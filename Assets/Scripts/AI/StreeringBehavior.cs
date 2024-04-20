@@ -11,9 +11,10 @@ public class StreeringBehavior : MonoBehaviour
     public float speedMax;
     private NavMeshAgent agent;
     public Transform player;
-    public float range = 10.0f;
+    [Range(1, 100)] public float range;
     public float radiusSphere = 1.0f;
     public Color colorgizmos;
+    public Vector3 rp;
     public void Arrive(Vector3 target)
     {
         Vector3 direction = target - transform.position;
@@ -34,8 +35,20 @@ public class StreeringBehavior : MonoBehaviour
         agent.SetDestination(target);
     }
 
-    public void Evade()
+    public void EvadeNavigatorMesh(Vector3 target)
     {
+        if (agent == null) return;
+        ArriveNavigatorMesh(target);
+        if(agent.remainingDistance < 9)
+        {
+            rp = rp.normalized;
+            rp.x += Mathf.Cos(Time.deltaTime * 10f);
+            rp.z -= Mathf.Sin(Time.deltaTime * 10f);
+            rp = transform.position + rp * 5f;
+            ArriveNavigatorMesh(rp);
+
+        }
+        
 
     }
         
@@ -61,7 +74,7 @@ public class StreeringBehavior : MonoBehaviour
         ArriveNavigatorMesh(target);
         if(agent.remainingDistance < agent.stoppingDistance)
         {
-            //RandomPoint(,range, )
+            RandomPoint(transform.position, range, out rp);
         }
         
     }
@@ -69,19 +82,22 @@ public class StreeringBehavior : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.color = Color.red;
     }
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        RandomPoint(transform.position, range, out rp);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ArriveNavigatorMesh(player.position);
-        Debug.Log(agent.remainingDistance);
-        Debug.Log(agent.stoppingDistance);
+        //ArriveNavigatorMesh(player.position);
+        WanderNavigatorMesh(rp);
+        Debug.Log(agent.remainingDistance < agent.stoppingDistance);
+        Debug.Log(rp.normalized);
     }
     
 }
