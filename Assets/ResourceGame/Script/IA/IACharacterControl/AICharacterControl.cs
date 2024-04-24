@@ -9,10 +9,11 @@ public class AICharacterControl : MonoBehaviour
 {
     //protected ThirdPersonCharacterAnimatorBase character;
     protected VisionSensor _AIEye;
-    protected Health health;
+    public Health Health;
 
     public virtual void LoadComponent()
     {
-
+        Health = GetComponent<Health>();
+        _AIEye = GetComponent<VisionSensor>();
     }
 }

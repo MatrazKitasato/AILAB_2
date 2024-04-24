@@ -9,7 +9,7 @@ public class ActionNode : Action
 {
     protected AICharacterVehicle _AICharacterVehicle;
     protected AICharacterAction _AICharacterAction;
-    //protected UnitSC UnitSC;
+    public UnitGame UnitGame;
     public override void OnStart()
     {
         _AICharacterVehicle = GetComponent<AICharacterVehicle>();
@@ -24,13 +24,13 @@ public class ActionNode : Action
         }
         if (_AICharacterVehicle != null)
         {
-            //UnitSC = this._AICharacterVehicle.Health._Unity;
+            UnitGame = this._AICharacterVehicle.Health._UnitGame;
         }
         else
         {
             if (_AICharacterAction != null)
             {
-                //UnitSC = this._AICharacterAction.Health._Unity;
+                UnitGame = this._AICharacterAction.Health._UnitGame;
             }
         }
         base.OnStart();
